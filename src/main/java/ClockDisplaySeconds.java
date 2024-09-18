@@ -1,8 +1,11 @@
 package src.main.java;
 
 
-public class ClockDisplay
+public class ClockDisplaySeconds
 {
+    //Extend ClockDisplaySeconds to include a seconds field.
+    //Update all methods and parameters to accomodate this change
+
     //Implement 2 private NumberDisplay objects. 
     //  One for hours and one for minutes
     //Implement a private String for the display
@@ -14,7 +17,7 @@ public class ClockDisplay
     //The constructor should set hours as a NumberDisplay object with 24 as the limit
     //The constructor should set minutes as a NumberDisplay object with 60 as the limit
     //The constructor should call the method updateDisplay before finishing
-    public ClockDisplay(){
+    public ClockDisplaySeconds(){
         hours = new NumberDisplay(24); //limit for hours
         minutes = new NumberDisplay (60);
         seconds = new NumberDisplay (60);
@@ -24,7 +27,7 @@ public class ClockDisplay
     //The constructor should set hours as a NumberDisplay object with 24 as the limit
     //The constructor should set minutes as a NumberDisplay object with 60 as the limit
     //The constructor should call the method setTime with the parameters passed in
-    public ClockDisplay(int hour, int minute, int second){
+    public ClockDisplaySeconds(int hour, int minute, int second){
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
         seconds = new NumberDisplay(60);
@@ -36,16 +39,16 @@ public class ClockDisplay
     //The hours should increase when the minutes roll over
     //The updateDisplay method should be called before finishing
     public void timeTick(){
-        minutes.increment(); // use the method for incremnts from number display
-        
-        if(minutes.getValue() == 0){
-            hours.increment();
-        }
-        
         seconds.increment();
         if(seconds.getValue() == 0){
             minutes.increment();
         }
+        
+        minutes.increment(); // use the method for incremnts from number display        
+        if(minutes.getValue() == 0){
+            hours.increment();
+        }
+        
         
         updateDisplay();
     }
@@ -53,9 +56,9 @@ public class ClockDisplay
     //The method should set the hours value and minutes value
     //The updateDisplay method should be called before finishing
     public void setTime (int hour, int minute, int second){
+        seconds.setValue(second);
         minutes.setValue(minute);
         hours.setValue(hour);
-        seconds.setValue(second);
         
         updateDisplay();
     }
@@ -67,14 +70,7 @@ public class ClockDisplay
     //Implement a method updateDisplay that takes no parameters and returns nothing
     //The method should update the displayString with the current time in a format
     //  HH:MM
-    public void updateDisplay(){
-        String output = "";
-        
-        output = hours.getDisplayValue();
-        output = output + ":";
-        output = output + minutes.getDisplayValue();
-        
-        display = output;
-    
+    private void updateDisplay() {
+        display = hours.getDisplayValue() + ":" + minutes.getDisplayValue() + ":" + seconds.getDisplayValue();
     }
 }
